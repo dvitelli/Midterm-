@@ -1,0 +1,162 @@
+// Midterm.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include "pch.h"
+#include <iostream>
+#include <vector>
+#include <string>
+
+
+
+class Human {
+
+	std::string name;
+	int age;
+	char sex;
+
+	Human(){}
+	 
+protected:
+
+	Human(std::string nameIn, int ageIn, char sexIn){
+
+		name = nameIn;
+		age = ageIn;
+		sex = sexIn;
+	
+	}
+
+public: 
+
+	void setName(std::string nameIn) {
+
+		name = nameIn;
+
+	} void setAge(int ageIn) {
+
+		name = ageIn;
+
+	} void setSex(char sexIn) {
+
+		name = sexIn;
+	} std::string getName() {
+
+		return name;
+	} int getAge() {
+
+		return age;
+	} char getSex() {
+
+		return sex;
+	}
+
+	~Human()
+	{
+		std::cout << "Destructing human \n";
+	}
+
+
+
+};
+
+void printInfo(Human human) {
+
+	std::string name = human.getName();
+	int age = human.getAge();
+	char sex = human.getSex();
+
+
+	std::cout << "Print Human: " << std::endl;
+	std::cout << "Name : " << name << std::endl;
+	std::cout << "Age : " << age << std::endl;
+	std::cout << "Sex : " << sex << std::endl;
+}
+
+class Parent: public Human {
+
+	std::vector<std::string> children;
+
+public:
+
+	Parent() : Human("name", 0 , 'N') {
+
+	std::string Bart = "Bart", Lisa = "Lisa", Maggie = "Maggie";
+	
+	auto it = children.begin();
+	children.insert(it, Bart);
+	children.insert(it, Lisa);
+	children.insert(it, Maggie);
+
+	
+
+	}
+
+	Parent(std::string nameIn, int ageIn, char sexIn) : Human(nameIn, ageIn, sexIn) {}
+
+	/* void printChild() {} void setChild(Child childClass) {
+
+		for_each(children.begin(), children.end(), printChildren);
+
+	} 
+	void setChildAllowance(int allowance, Child childClass) {}
+	
+
+	void printChildren(std::string &n) {
+
+		std::cout << n << std::endl;
+	} */
+
+};
+
+class Child: protected Human{
+
+	std::string momName;
+	std::string dadName;
+	int allowance;
+
+public: 
+	
+	Child() : Human("name", 0, 'N') {}
+		
+	Child(std::string momNameIn, std::string dadNameIn, std::string nameIn, int ageIn, char sexIn) : Human(nameIn, ageIn, sexIn) {
+
+		momName = momNameIn;
+		dadName = dadNameIn;
+		allowance = 0;
+
+	}
+
+	int getAllowance() const {
+
+		std::cout << "Allowance is: " << allowance << std::endl;
+		return allowance;
+
+	}
+
+	void printParent() {
+
+		printf("Parent names: %s, %s\n", momName, dadName);
+		
+	}
+
+};
+
+int main()
+{
+	Parent Homer("Homer", 36, 'M');
+	Parent Marge("Marge", 34, 'F');
+	//Child Bart();
+	//Child Lisa();
+	//C/hild Maggie();
+
+	//Bart().getAllowance(); // step 2
+
+	//Bart().printParent(); // step 5
+
+	printInfo(Marge);
+	//printInfo(Lisa);
+
+
+
+	return 0;
+}
